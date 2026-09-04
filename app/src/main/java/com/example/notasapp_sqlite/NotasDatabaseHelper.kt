@@ -1,5 +1,6 @@
 package com.example.notasapp_sqlite
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -11,23 +12,84 @@ class NotasDatabaseHelper (context: Context) : SQLiteOpenHelper (
         private const val DATABASE_NAME  = "notas.db"
         private const val DATABASE_VERSION = 1
         private const val TABLE_NAME = "notas"
-        private const val COLUM_ID = "id"
-        private const val COLUM_TITLE = "titulo"
+        private const val COLUMN_ID = "id"
+        private const val COLUMN_TITLE = "titulo"
         private const val COLUMN_DESCRIPTION = "descripcion"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-      val createTableQuery =
-          "CREATE TABLE $TABLE_NAME ($COLUM_ID INTEGER PRIMARY KEY, $COLUM_TITLE TEXT, $COLUMN_DESCRIPTION TEXT)"
+        val createTableQuery =
+            "CREATE TABLE $TABLE_NAME ($COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, $COLUMN_TITLE TEXT, $COLUMN_DESCRIPTION TEXT)"
         db?.execSQL(createTableQuery)
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int
-    ) {
-        val dropTableQuery =
-            "DROP TABLE IF EXISTS $TABLE_NAME"
+    override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
+        val dropTableQuery = "DROP TABLE IF EXISTS $TABLE_NAME"
         db?.execSQL(dropTableQuery)
         onCreate(db)
     }
 
+    fun insertNota(nota: Nota) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_TITLE, nota.titulo)
+            put(COLUMN_DESCRIPTION, nota.descripcion)
+        }
+        db.insert(TABLE_NAME, null, values)
+        db.close()
+    }
+
+    fun getAllNotas(): List<Nota> {
+        val notasList = mutableListOf<Nota>()
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_NAME"
+        val cursor = db.rawQuery(query, null)
+
+        while (cursor.moveToNext()) {
+            val id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID))
+            val titulo = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TITLE))
+            val descripcion = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DESCRIPTION))
+
+            val nota = Nota(id, titulo, descripcion)
+            notasList.add(nota)
+        }
+        cursor.close()
+        db.close()
+        return notasList
+    }
+
+    fun updateNota(nota: Nota) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_TITLE, nota.titulo)
+            put(COLUMN_DESCRIPTION, nota.descripcion)
+        }
+        val whereClause = "$COLUMN_ID = ?"
+        val whereArgs = arrayOf(nota.id.toString())
+        db.update(TABLE_NAME, values, whereClause, whereArgs)
+        db.close()
+    }
+
+    fun getNotaByID(notaId: Int): Nota {
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_NAME WHERE $COLUMN_ID = $notaId"
+        val cursor = db.rawQuery(query, null)
+        cursor.moveToFirst()
+
+        val id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID))
+        val titulo = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TITLE))
+        val descripcion = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DESCRIPTION))
+
+        cursor.close()
+        db.close()
+        return Nota(id, titulo, descripcion)
+    }
+
+    fun deleteNota(notaId: Int) {
+        val db = writableDatabase
+        val whereClause = "$COLUMN_ID = ?"
+        val whereArgs = arrayOf(notaId.toString())
+        db.delete(TABLE_NAME, whereClause, whereArgs)
+        db.close()
+    }
 }
