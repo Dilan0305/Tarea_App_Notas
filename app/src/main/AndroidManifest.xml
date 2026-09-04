@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NotasAppSQLite">
         <activity
+            android:name=".AgregarNotaActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".AgregarNontaActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
