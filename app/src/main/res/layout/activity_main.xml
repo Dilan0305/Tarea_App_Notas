@@ -30,7 +30,6 @@
         android:layout_height="match_parent"/>
 
 
-
 <com.google.android.material.floatingactionbutton.FloatingActionButton
    android:id="@+id/FABAgregarNota"
     android:layout_alignParentBottom="true"
