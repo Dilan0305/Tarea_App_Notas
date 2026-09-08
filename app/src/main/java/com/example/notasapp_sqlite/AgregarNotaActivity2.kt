@@ -28,15 +28,13 @@ class AgregarNotaActivity2 : AppCompatActivity() {
         bindig.ivGuardarNota.setOnClickListener {
             val titulo = bindig.etTitulo.text.toString()
             val descripcion = bindig.etDescripcion.text.toString()
-            val nota = Nota(0, titulo, descripcion)
-            db.insertNota(nota)
-            startActivity(Intent(applicationContext, MainActivity ::class.java))
-            finishAffinity()
-            Toast.makeText(applicationContext, "Se a agregado la nota", Toast.LENGTH_SHORT).show()
 
-        }
+            if (!titulo.isEmpty() && !descripcion.isEmpty()) {
+                guardarNota(titulo, descripcion)
+            }else{
+                Toast.makeText(applicationContext, "LLene los campos", Toast.LENGTH_SHORT).show()
 
-
+            }
 
 
         setContentView(bindig.root)
@@ -46,5 +44,16 @@ class AgregarNotaActivity2 : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+}
+private fun guardarNota(titulo: String, descripcion: String){
+    val nota = Nota(0, titulo, descripcion)
+    db.insertNota(nota)
+    startActivity(Intent(applicationContext, MainActivity ::class.java))
+    finishAffinity()
+    Toast.makeText(applicationContext, "Se a agregado la nota", Toast.LENGTH_SHORT).show()
+
+
+
     }
 }
