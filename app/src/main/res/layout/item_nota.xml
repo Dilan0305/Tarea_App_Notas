@@ -26,6 +26,14 @@
                 android:textColor="@color/morado"
                 android:textStyle="bold" />
 
+            <ImageView
+                android:id="@+id/ivActualizarNota"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_editat_24"
+                android:layout_marginEnd="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"/>
+
         </RelativeLayout>
 
         <TextView

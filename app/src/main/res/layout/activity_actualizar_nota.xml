@@ -8,11 +8,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context=".AgregarNotaActivity">
+    tools:context=".ActualizarNotaActivity">
 
 
     <TextView
-        android:id="@+id/txtAgregarNota"
+        android:id="@+id/txtActualizarNota"
         android:layout_width="250dp"
         android:layout_height="61dp"
         android:layout_marginTop="64dp"
@@ -26,13 +26,13 @@
 
 
     <ImageView
-        android:id="@+id/ivGuardarNota"
+        android:id="@+id/ivActualizarNota"
         android:layout_width="66dp"
         android:layout_height="63dp"
         android:layout_marginEnd="8dp"
         android:src="@drawable/ic_check"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txtAgregarNota" />
+        app:layout_constraintTop_toTopOf="@+id/txtActualizarNota" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TILTitulo"
@@ -41,7 +41,7 @@
         android:layout_marginTop="48dp"
         android:padding="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAgregarNota">
+        app:layout_constraintTop_toBottomOf="@+id/txtActualizarNota">
 
         <EditText
             android:id="@+id/etTitulo"
