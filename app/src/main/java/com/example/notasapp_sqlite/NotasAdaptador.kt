@@ -22,7 +22,9 @@ class NotasAdaptador(
         return NotaViewHolder(view)
     }
 
-    override fun getItemCount(): Int = notas.size
+    override fun getItemCount(): Int{
+        return notas.size
+    }
 
     override fun onBindViewHolder(holder: NotaViewHolder, position: Int) {
         val note = notas[position]
@@ -30,8 +32,8 @@ class NotasAdaptador(
         holder.itemDescripcion.text = note.descripcion
     }
 
-    fun refreshData(newNotas: List<Nota>) {
-        notas = newNotas
+    fun refrescarLista(nuevaNotas: List<Nota>) {
+        notas = nuevaNotas
         notifyDataSetChanged()
     }
 }
