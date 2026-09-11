@@ -12,10 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NotasAppSQLite">
         <activity
-            android:name=".AgregarNotaActivity2"
-            android:exported="false" />
-        <activity
-            android:name=".AgregarNontaActivity"
+            android:name=".AgregarNotaActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

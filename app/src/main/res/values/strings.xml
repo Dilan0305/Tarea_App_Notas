@@ -5,5 +5,7 @@
     <string name="etTitulo">Titulo de la nota</string>
     <string name="etDescripcion">Decripcion de la nota</string>
     <string name="txtNotas">Nota</string>
+    <string name="item_titulo">Título</string>
+    <string name="item_descripcion">Descripción</string>
 </resources>
 
