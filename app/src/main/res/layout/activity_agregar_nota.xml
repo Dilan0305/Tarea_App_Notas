@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="15dp"
     tools:context=".AgregarNotaActivity">
 
-
     <TextView
         android:id="@+id/txtAgregarNota"
-        android:layout_width="250dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:padding="10dp"
         android:text="@string/txtAgregarNota"
         android:textColor="@color/morado"
         android:textSize="25sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/ivGuardarNota"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <ImageView
         android:id="@+id/ivGuardarNota"
-        android:layout_width="66dp"
-        android:layout_height="63dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="8dp"
+        android:contentDescription="@string/app_name"
         android:src="@drawable/ic_check"
+        app:layout_constraintBottom_toBottomOf="@+id/txtAgregarNota"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txtAgregarNota" />
 
@@ -38,7 +38,7 @@
         android:id="@+id/TILTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="24dp"
         android:padding="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtAgregarNota">
@@ -48,30 +48,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/etTitulo"
+            android:inputType="textPersonName"
             android:maxLines="1"
-            android:textSize="20dp" />
-
+            android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TILDescripcion"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TILTitulo">
+        app:layout_constraintTop_toBottomOf="@+id/TILTitulo"
+        app:layout_constraintVertical_bias="0.0">
 
         <EditText
             android:id="@+id/etDescripcion"
-            android:layout_width="362dp"
-            android:layout_height="207dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top"
             android:hint="@string/etDescripcion"
+            android:inputType="textMultiLine"
             android:textSize="20sp" />
-
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
