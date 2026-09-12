@@ -15,11 +15,7 @@ class NotasAdaptador(
     context: Context
 ) : RecyclerView.Adapter<NotasAdaptador.NotaViewHolder>() {
 
-    class NotaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val itemTitulo: TextView = itemView.findViewById(R.id.item_titulo)
-        val itemDescripcion: TextView = itemView.findViewById(R.id.item_descripcion)
-        val ivActualizarNota: ImageView = itemView.findViewById(R.id.ivActualizarNota)
-    }
+    private val db: NotasDatabaseHelper = NotasDatabaseHelper(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotaViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_nota, parent, false)
@@ -35,6 +31,7 @@ class NotasAdaptador(
         holder.itemTitulo.text = nota.titulo
         holder.itemDescripcion.text = nota.descripcion
 
+        /*Evento para actualizar una nota*/
         holder.ivActualizarNota.setOnClickListener {
             val intent = Intent(holder.itemView.context, ActualizarNotaActivity::class.java).apply {
                 putExtra("id_nota", nota.id)
@@ -49,6 +46,25 @@ class NotasAdaptador(
             ).show()
 
         }
+        /*Evento para eliminar una nota*/
+        holder.ivEliminar.setOnClickListener {
+            db.deleteNota(nota.id)
+            refrescarLista(db.getAllNotas())
+            Toast.makeText(
+                holder.itemView.context,
+                "Nota eliminada",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+    }
+
+    class NotaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val itemTitulo: TextView = itemView.findViewById(R.id.item_titulo)
+        val itemDescripcion: TextView = itemView.findViewById(R.id.item_descripcion)
+        val ivActualizarNota: ImageView = itemView.findViewById(R.id.ivActualizarNota)
+
+        val ivEliminar: ImageView = itemView.findViewById(R.id.ivEliminar)
     }
 
     fun refrescarLista(nuevaNotas: List<Nota>) {

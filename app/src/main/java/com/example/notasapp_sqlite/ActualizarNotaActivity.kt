@@ -26,7 +26,7 @@ class ActualizarNotaActivity : AppCompatActivity() {
             finish()
             return
         }
-        val nota = db.getNotaByID(idNota)
+        val nota = db.getIdNota(idNota)
         binding.etTitulo.setText(nota.titulo)
         binding.etDescripcion.setText(nota.descripcion)
 
