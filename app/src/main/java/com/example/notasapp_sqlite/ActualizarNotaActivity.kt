@@ -31,12 +31,12 @@ class ActualizarNotaActivity : AppCompatActivity() {
         binding.etDescripcion.setText(nota.descripcion)
 
         binding.ivActualizarNota.setOnClickListener {
-            val nuevoTitulo = binding.etTitulo.text.toString()
-            val nuevaDescripcion = binding.etDescripcion.text.toString()
-            val notaActualizada = Nota(idNota, nuevoTitulo, nuevaDescripcion)
+            val tituloNuevo = binding.etTitulo.text.toString()
+            val descirpcionNuevo = binding.etDescripcion.text.toString()
+            val notaActualizada = Nota(idNota, tituloNuevo, descirpcionNuevo)
             db.updateNota(notaActualizada)
             finish()
-            Toast.makeText(this, "Cambios Guardados", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "La nota se ha actualizado con exito", Toast.LENGTH_SHORT).show()
         }
     }
 }
